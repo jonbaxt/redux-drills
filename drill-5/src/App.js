@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 
-class App extends Component {
+import { getPeople, getPlanets, getStarships } from './ducks/star_wars';
 
+class App extends Component {
   render() {
+    
+    const newPeople = this.props.getPeople;
 
     const people = this.props.people.map( (person, i) => {
       return <p key={i}>{ person.name }</p>
@@ -28,12 +31,14 @@ class App extends Component {
             { people }
           </div> 
           <div>
-            <button>Get correct planets</button>
+            <button
+            onClick={this.props.getPlanets}>Get correct planets</button>
             <h3>Planets:</h3>
             { planets }
           </div> 
           <div>
-            <button>Get correct starships</button>
+            <button
+            onClick={this.props.getStarships}>Get correct starships</button>
             <h3>Starships:</h3>
             { starships }
           </div> 
@@ -51,4 +56,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { getPeople, getPlanets, getStarships })(App);
